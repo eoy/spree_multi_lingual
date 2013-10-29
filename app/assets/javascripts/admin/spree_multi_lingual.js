@@ -14,3 +14,22 @@ var handle_rename = function(e, data) {
     error: handle_ajax_error
   });
 };
+
+var handle_create = function(e, data) {
+  last_rollback = data.rlbk
+  var node = data.rslt.obj
+  var name = data.rslt.name
+  var position = data.rslt.position
+  var new_parent = data.rslt.parent
+
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    url: "taxons" + '/',
+    data: ({"taxon[name]": name, "taxon[parent_id]": new_parent.attr("id"), "taxon[position]": position, authenticity_token: AUTH_TOKEN }),
+    error: handle_ajax_error,
+    success: function(data,result){
+      node.attr('id', data.id);
+    }
+  });
+}
