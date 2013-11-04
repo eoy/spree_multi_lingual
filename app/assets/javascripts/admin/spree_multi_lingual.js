@@ -4,7 +4,7 @@ var handle_rename = function(e, data) {
   last_rollback = data.rlbk;
   var node = data.rslt.obj;
   var name = data.rslt.new_name;
-  var params = {_method: "put", "taxon[name]": name, authenticity_token: AUTH_TOKEN};
+  var params = {_method: "put", authenticity_token: AUTH_TOKEN, locale: "en"};
   params[param_name] = name;
   $.ajax({
     type: "POST",
